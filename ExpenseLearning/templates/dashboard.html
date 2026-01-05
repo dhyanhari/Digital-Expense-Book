@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<h1 style="margin-bottom:30px;">Expense Dashboard</h1>
+
+<div style="background:#fff;padding:25px;border-radius:18px;box-shadow:var(--shadow);margin-bottom:35px;">
+    <form method="GET" style="display:flex;gap:15px;align-items:center;">
+        <label>Category</label>
+        <select name="category">
+            <option value="">All</option>
+            <option>Food</option>
+            <option>Travel</option>
+            <option>Shopping</option>
+            <option>Rent</option>
+            <option>Others</option>
+        </select>
+        <button type="submit">Filter</button>
+    </form>
+</div>
+
+<table>
+    <tr>
+        <th>#</th>
+        <th>Category</th>
+        <th>Amount</th>
+        <th>Description</th>
+        <th>Actions</th>
+    </tr>
+    {% for expense in expenses %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ expense.category }}</td>
+        <td>₹ {{ expense.amount }}</td>
+        <td>{{ expense.description }}</td>
+        <td>
+            <a class="btn btn-edit" href="{% url 'edit_expense' expense.id %}">Edit</a>
+            <a class="btn btn-delete" href="{% url 'delete_expense' expense.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h3 style="margin-top:30px;">Total Expense: ₹ {{ total }}</h3>
+
+{% endblock %}

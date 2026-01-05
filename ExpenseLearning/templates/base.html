@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Expense Tracker{% endblock %}</title>
+
+    <style>
+        :root {
+            --primary: #3A4F7A;
+            --secondary: #A26769;
+            --accent: #DDB892;
+            --success: #4CAF50;
+            --danger: #C0392B;
+
+            --bg: #F6F4F0;
+            --card: #FFFFFF;
+
+            --text-dark: #2B2B2B;
+            --text-light: #6B6B6B;
+
+            --radius: 18px;
+            --shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-dark);
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary), #2A3B5E);
+            padding: 18px 45px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 26px;
+            position: relative;
+        }
+
+        .navbar a:last-child {
+            margin-right: 0;
+        }
+
+        .navbar a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: var(--accent);
+            left: 0;
+            bottom: -6px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
+        }
+
+        /* LAYOUT */
+        .container {
+            padding: 45px;
+        }
+
+        /* TABLE */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        th, td {
+            padding: 16px;
+            text-align: center;
+        }
+
+        th {
+            background: #EFEAE4;
+            text-transform: uppercase;
+            font-size: 13px;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        tr:not(:last-child) {
+            border-bottom: 1px solid #E3DED8;
+        }
+
+        tr:hover {
+            background: #FBF9F6;
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 8px 16px;
+            border-radius: 12px;
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-add { background: var(--success); }
+        .btn-edit { background: var(--secondary); }
+        .btn-delete { background: var(--danger); }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* SHARED FORMS */
+        .form-box,
+        .auth-box {
+            width: 420px;
+            margin: 90px auto;
+            background: var(--card);
+            padding: 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 6px;
+            display: block;
+            font-size: 14px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+            border: 1px solid #DDD7CF;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(58,79,122,0.15);
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 14px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.95;
+        }
+
+        .back-link {
+            text-align: center;
+            display: block;
+            margin-top: 20px;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        p {
+            background: #FCE4E4;
+            color: #8B0000;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        @media(max-width:600px) {
+            .container { padding: 25px; }
+            .form-box, .auth-box { width: 95%; }
+        }
+    </style>
+</head>
+
+<body>
+
+{% block navbar %}
+{% if user.is_authenticated %}
+<nav class="navbar">
+    <div>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'add_expense' %}">Add Expense</a>
+    </div>
+    <a href="{% url 'logout' %}">Logout</a>
+</nav>
+{% endif %}
+{% endblock %}
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>
