@@ -1,4 +1,4 @@
-# Digital-Expense-Book# Expense-Tracker
+# Digital-Expense-Book
 
 A simple expense tracker application to record, view, and manage personal expenses.
 
