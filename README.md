@@ -21,7 +21,7 @@ A simple expense tracker application to record, view, and manage personal expens
 ## Installation
 
 1. Clone the repository:
-   git clone https://github.com/aadith2/Expense-Tracker.git
+   git clone https://github.com/dhyanhari/Digital-Expense-Book.git
    cd Expense-Tracker
 
 2. Install dependencies
